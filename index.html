@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#777b80"><title>CardNest · 私人酒馆收藏馆</title>
+<style>
+:root{--bg:#e9e9e7;--panel:rgba(255,255,255,.62);--panel2:rgba(255,255,255,.42);--text:#303236;--muted:#777b80;--line:rgba(80,84,90,.16);--accent:#777f88;--accentText:#fff;--shadow:0 12px 40px rgba(50,55,60,.08);--radius:22px}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 10% 0%,color-mix(in srgb,var(--accent) 16%,transparent),transparent 38%),radial-gradient(ellipse at 90% 30%,rgba(255,255,255,.7),transparent 40%),var(--bg);color:var(--text);font:15px/1.55 system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;min-height:100vh;transition:.25s}
+body.dark{--bg:#202226;--panel:rgba(48,51,57,.78);--panel2:rgba(55,58,64,.58);--text:#eceef0;--muted:#a5a9af;--line:rgba(220,225,230,.13);--shadow:0 12px 40px rgba(0,0,0,.22);--accentText:#202226}
+button,input,textarea,select{font:inherit;color:inherit}button{cursor:pointer;border:0}.app{max-width:1440px;margin:auto;padding:22px;display:grid;grid-template-columns:248px minmax(0,1fr);gap:20px;min-height:100vh}.glass{background:var(--panel);border:1px solid var(--line);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);box-shadow:var(--shadow);border-radius:var(--radius)}.sidebar{padding:22px 16px;display:flex;flex-direction:column;gap:20px;position:sticky;top:22px;height:calc(100vh - 44px)}.brand{display:flex;align-items:center;gap:12px;padding:4px 7px}.logo{width:42px;height:42px;border-radius:15px;background:linear-gradient(145deg,var(--accent),color-mix(in srgb,var(--accent) 35%,white));display:grid;place-items:center;color:white;font-size:20px}.brand b{font-size:18px;letter-spacing:.2px}.brand small{display:block;color:var(--muted);font-size:11px}.nav{display:grid;gap:5px}.nav button{display:flex;align-items:center;gap:12px;text-align:left;padding:11px 13px;border-radius:14px;background:transparent;color:var(--muted);transition:.18s}.nav button:hover,.nav button.active{background:var(--panel2);color:var(--text)}.nav button.active{box-shadow:inset 3px 0 var(--accent)}.nav .ico{width:20px;text-align:center;font-size:17px}.sidebottom{margin-top:auto;display:grid;gap:8px}.main{min-width:0;padding:4px 0 28px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:2px 0 22px}.crumb{color:var(--muted);font-size:13px}.top-actions{display:flex;gap:8px;align-items:center}.btn{padding:10px 14px;border-radius:13px;background:var(--panel);border:1px solid var(--line);transition:.18s}.btn:hover{transform:translateY(-1px);filter:brightness(1.04)}.btn.primary{background:var(--accent);color:var(--accentText);border-color:transparent}.btn.small{padding:7px 10px;font-size:13px}.iconbtn{width:40px;height:40px;border-radius:13px;background:var(--panel);border:1px solid var(--line)}.hero{padding:26px 28px;margin-bottom:18px;display:flex;justify-content:space-between;align-items:center;gap:20px;overflow:hidden;position:relative}.hero:after{content:"";position:absolute;width:240px;height:240px;border-radius:50%;right:5%;top:-150px;background:color-mix(in srgb,var(--accent) 18%,transparent);filter:blur(3px)}.eyebrow{font-size:11px;letter-spacing:1.6px;color:var(--muted);font-weight:700}.hero h1{font-size:clamp(25px,4vw,36px);margin:7px 0 4px;letter-spacing:-.8px}.hero p{margin:0;color:var(--muted)}.hero .hero-actions{z-index:1;display:flex;gap:8px;flex-wrap:wrap}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}.stat{padding:17px 19px}.stat span{color:var(--muted);font-size:12px}.stat strong{display:block;font-size:27px;margin-top:3px;font-weight:650}.section-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:22px 2px 12px}.section-head h2{font-size:17px;margin:0}.section-head p{color:var(--muted);font-size:12px;margin:3px 0 0}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}.resource{padding:13px;min-width:0;cursor:pointer;transition:.2s}.resource:hover{transform:translateY(-3px)}.cover{height:130px;border-radius:15px;background:linear-gradient(135deg,color-mix(in srgb,var(--accent) 23%,var(--panel)),var(--panel2));display:grid;place-items:center;overflow:hidden;color:var(--muted);font-size:34px;margin-bottom:12px}.cover img{width:100%;height:100%;object-fit:cover}.resource h3{font-size:15px;margin:0 0 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.resource .sub{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.chips{display:flex;gap:5px;flex-wrap:wrap;margin-top:10px}.chip{font-size:11px;padding:3px 8px;border:1px solid var(--line);border-radius:30px;color:var(--muted)}.toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}.field{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:10px 12px;outline:none;min-width:0}.field:focus{border-color:var(--accent)}.search{flex:1;min-width:180px}.empty{padding:45px 20px;text-align:center;color:var(--muted)}.empty .big{font-size:32px;margin-bottom:8px}.detail{padding:22px}.detailtop{display:flex;gap:18px;align-items:flex-start}.detailcover{width:130px;height:150px;border-radius:17px;background:var(--panel2);display:grid;place-items:center;overflow:hidden;font-size:34px;flex:none}.detailcover img{width:100%;height:100%;object-fit:cover}.detail h1{margin:2px 0 6px;font-size:25px}.detailmeta{color:var(--muted);font-size:13px}.detail-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:13px}.detailgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}.editbox{padding:15px}.editbox h3{font-size:13px;margin:0 0 9px;color:var(--muted)}.editbox textarea{width:100%;min-height:90px;resize:vertical;background:transparent;border:0;outline:none}.editbox input{width:100%;background:transparent;border:0;outline:none}.wide{grid-column:1/-1}.modalback{position:fixed;inset:0;background:rgba(15,17,20,.38);backdrop-filter:blur(5px);display:none;align-items:center;justify-content:center;padding:16px;z-index:10}.modalback.show{display:flex}.modal{width:min(620px,100%);max-height:90vh;overflow:auto;padding:22px}.modal h2{margin:0 0 16px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:11px}.formrow{display:grid;gap:5px}.formrow.full{grid-column:1/-1}.formrow label{font-size:12px;color:var(--muted)}.formrow input,.formrow textarea,.formrow select{width:100%}.formrow textarea{min-height:80px;resize:vertical}.modalfoot{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}.hidden{display:none!important}.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--text);color:var(--bg);padding:10px 16px;border-radius:30px;z-index:20;box-shadow:var(--shadow);font-size:13px}.settings{padding:20px}.swatches{display:flex;gap:9px;flex-wrap:wrap}.swatch{width:32px;height:32px;border-radius:50%;border:2px solid var(--panel);outline:1px solid var(--line)}.mobilebar{display:none}
+@media(max-width:900px){.app{grid-template-columns:1fr;padding:12px}.sidebar{display:none}.mobilebar{display:flex;position:fixed;z-index:8;bottom:10px;left:10px;right:10px;justify-content:space-around;padding:8px;border-radius:20px}.mobilebar button{background:transparent;color:var(--muted);font-size:11px;display:grid;justify-items:center;gap:2px;padding:5px}.mobilebar button.active{color:var(--text)}.main{padding-bottom:85px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.stats{grid-template-columns:repeat(2,1fr)}.hero{padding:21px;align-items:flex-start;flex-direction:column}.topbar{margin-bottom:14px}}
+@media(max-width:520px){.grid{grid-template-columns:1fr 1fr;gap:9px}.resource{padding:9px}.cover{height:105px}.detailtop{gap:12px}.detailcover{width:90px;height:112px}.detail h1{font-size:20px}.detailgrid{grid-template-columns:1fr}.wide{grid-column:auto}.formgrid{grid-template-columns:1fr}.formrow.full{grid-column:auto}.hero .hero-actions .btn{padding:8px 10px;font-size:12px}.stat{padding:13px}.stat strong{font-size:23px}}
+
+/* CardNest enhancement: ID-card cards + streamlined batch import */
+.idcard{display:grid;grid-template-columns:42% 1fr;min-height:142px;padding:10px;gap:11px;align-items:stretch}
+.idcard .cover{height:100%;min-height:120px;margin:0;border-radius:13px}
+.idcard .idinfo{min-width:0;display:flex;flex-direction:column;justify-content:center}
+.idcard .id-kicker{font-size:9px;letter-spacing:1.2px;color:var(--muted);font-weight:800;margin-bottom:5px}
+.idcard h3{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.idcard .id-desc{font-size:11px;color:var(--muted);display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;margin-top:5px}
+.idcard .chips{margin-top:7px}
+.import-hint{font-size:12px;color:var(--muted);line-height:1.5}
+.import-preview{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}
+.preview-item{padding:10px;border:1px solid var(--line);border-radius:12px;background:var(--panel2);font-size:12px;min-width:0}
+.preview-item b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media(max-width:520px){.idcard{grid-template-columns:38% 1fr;min-height:120px}.idcard .cover{min-height:100px}.idcard .id-desc{-webkit-line-clamp:2}}
+
+.embedded-fullscreen{position:fixed;inset:0;background:var(--panel);display:flex;flex-direction:column;padding:env(safe-area-inset-top) 16px env(safe-area-inset-bottom);height:100dvh;box-sizing:border-box}
+#modalBack:has(.embedded-fullscreen){padding:0;align-items:stretch}
+#modalBack:has(.embedded-fullscreen) .modal{width:100%;max-width:none;max-height:100dvh;height:100dvh;padding:0;border-radius:0;overflow:hidden}
+.embedded-modal-head,.embedded-modal-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid var(--line)}
+.embedded-modal-body{flex:1;overflow:auto;display:flex;flex-direction:column;gap:10px;padding:16px 0}
+.embedded-modal-body label{font-size:13px;color:var(--muted)}
+.embedded-fulltext{width:100%;flex:1;min-height:45vh;resize:vertical;white-space:pre-wrap;line-height:1.55}
+.embedded-check{display:flex;align-items:center;gap:8px}
+.embedded-modal-foot{border-top:1px solid var(--line);border-bottom:0;justify-content:flex-end}
+</style></head>
+<body>
+<div class="app">
+<aside class="sidebar glass">
+ <div class="brand"><div class="logo">✳</div><div><b>CardNest</b><small>私人酒馆收藏馆</small></div></div>
+ <nav class="nav" id="sideNav"></nav>
+ <div class="sidebottom"><button class="btn" onclick="openAdd()">＋ 新建收藏</button><button class="btn small" onclick="showPage('settings')">⚙ 设置与备份</button></div>
+ <div style="font-size:11px;color:var(--muted);padding:4px 8px">V1 · 数据优先保存在本设备</div>
+</aside>
+<main class="main">
+ <header class="topbar"><div class="crumb" id="crumb">私人收藏馆 / 首页</div><div class="top-actions"><button class="iconbtn" title="切换深色模式" onclick="toggleDark()">◐</button><button class="btn primary" onclick="openAdd()">＋ 添加收藏</button></div></header>
+ <div id="view"></div>
+</main>
+</div>
+<nav class="mobilebar glass" id="mobileNav"></nav>
+<div class="modalback" id="modalBack" onclick="if(event.target===this)closeModal()"><div class="modal glass" id="modal"></div></div>
+<div id="toast" class="toast hidden"></div>
+<input id="fileInput" type="file" accept=".png,.json,.webp,.jpg,.jpeg,.txt,.yaml,.yml" multiple class="hidden">
+<input id="backupInput" type="file" accept=".json,application/json" class="hidden">
+<script>
+const categories=[['home','⌂','首页'],['character','♙','角色卡库'],['preset','☷','预设库'],['tool','⚒','工具箱'],['inspiration','✧','灵感收藏'],['chat','▤','聊天存档'],['todo','✓','待游玩'],['tags','◇','标签管理'],['settings','⚙','备份与设置']];
+const names=Object.fromEntries(categories.map(x=>[x[0],x[2]]));
+let db,items=[],current=null,page='home',filter='全部',query='';
+const req=indexedDB.open('CardNestDB',1);
+req.onupgradeneeded=e=>{const d=e.target.result;if(!d.objectStoreNames.contains('items'))d.createObjectStore('items',{keyPath:'id'});};
+req.onsuccess=async e=>{db=e.target.result;await load();render();};
+req.onerror=()=>{toast('本地数据库无法打开，请尝试更新浏览器');};
+function store(mode='readonly'){return db.transaction('items',mode).objectStore('items')}
+function all(){return new Promise((res,rej)=>{let r=store().getAll();r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)})}
+async function load(){items=await all()}
+function saveItem(obj){return new Promise((res,rej)=>{let r=store('readwrite').put(obj);r.onsuccess=()=>res();r.onerror=()=>rej(r.error)})}
+function deleteItem(id){return new Promise((res,rej)=>{let r=store('readwrite').delete(id);r.onsuccess=()=>res();r.onerror=()=>rej(r.error)})}
+function uid(){return crypto.randomUUID?crypto.randomUUID():Date.now()+'-'+Math.random()}
+function esc(s=''){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function toast(s){let t=document.getElementById('toast');t.textContent=s;t.classList.remove('hidden');setTimeout(()=>t.classList.add('hidden'),2300)}
+function nav(){let html=categories.map(([id,ic,n])=>`<button class="${page===id?'active':''}" onclick="showPage('${id}')"><span class="ico">${ic}</span>${n}</button>`).join('');document.getElementById('sideNav').innerHTML=html;document.getElementById('mobileNav').innerHTML=categories.filter(x=>['home','character','todo','inspiration','settings'].includes(x[0])).map(([id,ic,n])=>`<button class="${page===id?'active':''}" onclick="showPage('${id}')"><span style="font-size:19px">${ic}</span>${n}</button>`).join('')}
+function showPage(p){page=p;current=null;render()}
+function render(){nav();document.getElementById('crumb').textContent='私人收藏馆 / '+names[page];let v=document.getElementById('view');if(page==='home')v.innerHTML=home();else if(page==='settings')v.innerHTML=settings();else if(page==='tags')v.innerHTML=tagPage();else if(page==='todo')v.innerHTML=listPage('character',true);else v.innerHTML=listPage(page,false);if(page==='settings')populateApiConfig()}
+function home(){let chars=items.filter(x=>x.type==='character');let recent=[...items].sort((a,b)=>b.created-a.created).slice(0,3);return `<section class="hero glass"><div><div class="eyebrow">YOUR PRIVATE COLLECTION</div><h1>把喜欢的，慢慢收藏。</h1><p>收集角色、灵感与工具，等想玩的时候再打开。</p></div><div class="hero-actions"><button class="btn primary" onclick="openAdd()">＋ 添加资源</button><button class="btn" onclick="document.getElementById('fileInput').click()">↑ 导入文件</button></div></section><section class="stats"><div class="stat glass"><span>全部收藏</span><strong>${items.length}</strong></div><div class="stat glass"><span>角色卡</span><strong>${chars.length}</strong></div><div class="stat glass"><span>待游玩</span><strong>${chars.filter(x=>(x.status||'待游玩')==='待游玩').length}</strong></div><div class="stat glass"><span>正在玩</span><strong>${chars.filter(x=>x.status==='正在玩').length}</strong></div></section><div class="section-head"><div><h2>最近添加</h2><p>最近收进收藏馆的资源</p></div><button class="btn small" onclick="showPage('character')">查看全部 →</button></div>${recent.length?`<div class="grid">${recent.map(card).join('')}</div>`:`<div class="glass empty"><div class="big">✧</div><b>收藏馆还是空的</b><p>先添加一张角色卡，开始建立你的私人资源库吧。</p><button class="btn primary" onclick="openAdd()">添加第一份收藏</button></div>`}<div class="section-head"><div><h2>快捷入口</h2><p>按资源类型整理</p></div></div><div class="grid">${categories.slice(1,5).map(([id,ic,n])=>`<div class="glass resource" onclick="showPage('${id}')"><div class="cover" style="height:75px">${ic}</div><h3>${n}</h3><div class="sub">${items.filter(x=>x.type===id).length} 份收藏</div></div>`).join('')}</div>`}
+function card(x){let image=x.image?`<img src="${x.image}" alt="">`:({character:'♙',preset:'☷',tool:'⚒',inspiration:'✧',chat:'▤'}[x.type]||'◇');let desc=x.description||x.note||x.raw?.data?.description||x.raw?.description||'';return `<article class="resource glass idcard" onclick="openDetail('${x.id}')"><div class="cover">${image}</div><div class="idinfo"><div class="id-kicker">${esc((x.type==='character'?'CHARACTER ID':names[x.type]||'COLLECTION').toUpperCase())}</div><h3>${esc(x.name)}</h3><div class="sub">${esc(x.author||x.url||names[x.type]||'未填写来源')}</div><div class="id-desc">${esc(desc||'尚未填写简介')}</div><div class="chips">${(x.tags||[]).slice(0,2).map(t=>`<span class="chip">${esc(t)}</span>`).join('')}<span class="chip">${esc(x.status||names[x.type])}</span></div></div></article>`}
+function listPage(type,todo){let list=items.filter(x=>todo?x.type==='character':x.type===type);if(todo)list=list.filter(x=>['想玩','待游玩','正在玩','已完成','搁置'].includes(x.status||'待游玩'));if(query)list=list.filter(x=>(x.name+' '+(x.author||'')+' '+(x.tags||[]).join(' ')+' '+(x.repo||'')).toLowerCase().includes(query.toLowerCase()));if(filter!=='全部')list=list.filter(x=>(x.tags||[]).includes(filter)||x.status===filter||x.folder===filter);list.sort((a,b)=>(a.order??a.created)-(b.order??b.created));return `<div class="section-head"><div><h2>${todo?'待游玩清单':names[type]}</h2><p>${todo?'管理想玩的角色与当前进度':'整理、筛选你的收藏资源'}</p></div><button class="btn primary" onclick="openAdd('${type}')">＋ 添加</button></div><div class="toolbar"><input class="field search" placeholder="搜索名称、作者、标签、Repo…" value="${esc(query)}" oninput="query=this.value;refreshList('${type}',${todo})"><select class="field" onchange="filter=this.value;refreshList('${type}',${todo})"><option>全部</option>${[...new Set(list.flatMap(x=>[...(x.tags||[]),x.status||'',x.folder||'']))].filter(Boolean).map(t=>`<option ${filter===t?'selected':''}>${esc(t)}</option>`).join('')}</select><button class="btn" onclick="document.getElementById('fileInput').click()">↑ 导入文件</button><button class="btn" onclick="aiClassifyAll()">✧ AI 分类</button></div>${list.length?`<div class="grid">${list.map(card).join('')}</div>`:`<div class="glass empty"><div class="big">⌕</div><b>这里暂时没有内容</b><p>可以添加收藏，或换个关键词试试。</p></div>`}`}
+function refreshList(t,todo){let y=document.getElementById('view');y.innerHTML=listPage(t,todo)}
+function tagPage(){let tags={};items.forEach(x=>(x.tags||[]).forEach(t=>tags[t]=(tags[t]||0)+1));return `<div class="section-head"><div><h2>标签管理</h2><p>所有资源共用标签，方便交叉查找</p></div><button class="btn primary" onclick="addTag()">＋ 新建标签</button></div><div class="glass settings"><div class="chips">${Object.keys(tags).length?Object.entries(tags).map(([t,n])=>`<button class="chip" onclick="query='${esc(t)}';showPage('character')"># ${esc(t)} · ${n}</button>`).join(''):'还没有标签，编辑收藏时可以添加。'}</div></div>`}
+function settings(){return `<div class="section-head"><div><h2>设置与备份</h2><p>主题、颜色与数据安全</p></div></div><section class="glass settings"><h3>外观</h3><p style="color:var(--muted);font-size:13px">选择浅色或深色模式，也可以自定义主题强调色。</p><div class="toolbar"><button class="btn" onclick="document.body.classList.remove('dark');localStorage.setItem('cn-dark','0')">☀ 浅色模式</button><button class="btn" onclick="document.body.classList.add('dark');localStorage.setItem('cn-dark','1')">☾ 深色模式</button><label class="btn">自定义颜色 <input type="color" value="${localStorage.getItem('cn-accent')||'#777f88'}" onchange="setAccent(this.value)" style="width:25px;border:0;background:transparent;vertical-align:middle"></label></div><div class="swatches">${['#777f88','#8b8580','#777f79','#817c91','#9a8585','#71858b','#a18d72','#68717d'].map(c=>`<button class="swatch" style="background:${c}" onclick="setAccent('${c}')"></button>`).join('')}</div></section><section class="glass settings" style="margin-top:13px"><h3>数据备份</h3><p style="color:var(--muted);font-size:13px">所有内容默认保存在当前浏览器。定期导出备份，并妥善保存文件。换设备时可导入备份。</p><div class="toolbar"><button class="btn primary" onclick="exportBackup()">↓ 导出完整备份</button><button class="btn" onclick="document.getElementById('backupInput').click()">↑ 导入备份</button></div><p style="font-size:12px;color:var(--muted)">提示：本地数据不会自动同步到其他设备。云端备份/跨设备同步将在后续版本接入，需要用户自行选择同步服务。</p></section><section class="glass settings" style="margin-top:13px"><h3>AI API 配置</h3>
+<p style="color:var(--muted);font-size:13px">配置兼容 OpenAI Chat Completions 的接口，用于批量整理资源分类与标签。API Key 仅保存在当前浏览器本地。</p>
+<div class="formgrid">
+<div class="formrow full"><label>API Base URL</label><input class="field" id="api-base" placeholder="https://api.openai.com/v1"></div>
+<div class="formrow"><label>API Key</label><input class="field" id="api-key" type="password" placeholder="sk-…"></div>
+<div class="formrow"><label>模型</label><select class="field" id="api-model"><option value="">先获取模型列表</option></select></div>
+</div>
+<div class="toolbar" style="margin-top:12px"><button class="btn" onclick="fetchApiModels()">获取模型列表</button><button class="btn primary" onclick="saveApiConfig()">保存 API 配置</button><button class="btn" onclick="testApiConfig()">测试连接</button><button class="btn" onclick="aiClassifyAll()">AI 批量分类全部收藏</button></div>
+<p class="import-hint">提示：浏览器直连 API 可能受服务端 CORS 限制。请勿在共享设备保存密钥。</p></section>
+<section class="glass settings" style="margin-top:13px"><h3>数据管理</h3><p style="color:var(--muted);font-size:13px">当前收藏 ${items.length} 条。清空操作不可撤销，请先备份。</p><button class="btn" onclick="clearAll()">清空本地数据</button></section>`}
+
+function getApiConfig(){try{return JSON.parse(localStorage.getItem('cn-api')||'{}')}catch{return {}}}
+function saveApiConfig(){
+  const old=getApiConfig(),modelEl=document.getElementById('api-model');
+  const cfg={base:(document.getElementById('api-base').value.trim()||'https://api.openai.com/v1').replace(/\/+$/,''),
+    key:document.getElementById('api-key').value.trim(),model:modelEl?.value||old.model||''};
+  localStorage.setItem('cn-api',JSON.stringify(cfg));toast('API 配置已保存在本设备');
+}
+function populateApiConfig(){
+  const c=getApiConfig(),b=document.getElementById('api-base'),k=document.getElementById('api-key'),m=document.getElementById('api-model');
+  if(!b)return;b.value=c.base||'';k.value=c.key||'';
+  if(m){m.innerHTML='';if(c.model){const o=document.createElement('option');o.value=c.model;o.textContent=c.model;m.appendChild(o)}else m.innerHTML='<option value="">先获取模型列表</option>'}
+}
+async function fetchApiModels(){
+  const base=(document.getElementById('api-base')?.value.trim()||'https://api.openai.com/v1').replace(/\/+$/,'');
+  const key=document.getElementById('api-key')?.value.trim();
+  if(!key){toast('请先填写 API Key');return}
+  try{
+    const r=await fetch(base+'/models',{headers:{Authorization:'Bearer '+key}});
+    if(!r.ok)throw Error('HTTP '+r.status+'：'+(await r.text()).slice(0,180));
+    const data=await r.json(),models=(data.data||data.models||[]).map(x=>typeof x==='string'?x:x.id||x.name).filter(Boolean);
+    if(!models.length)throw Error('接口没有返回模型列表，请确认 Base URL 是否包含 /v1');
+    const sel=document.getElementById('api-model'),previous=getApiConfig().model;sel.innerHTML='';
+    models.sort().forEach(id=>{const o=document.createElement('option');o.value=id;o.textContent=id;sel.appendChild(o)});
+    if(models.includes(previous))sel.value=previous;
+    saveApiConfig();toast('已获取 '+models.length+' 个模型');
+  }catch(e){toast('获取模型失败：'+e.message+'（可能是地址、Key 或 CORS 问题）')}
+}
+async function callChatApi(messages){
+  const c=getApiConfig();if(!c.key||!c.base||!c.model)throw Error('请先配置 API 地址、Key 并选择模型');
+  const r=await fetch(c.base+'/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+c.key},body:JSON.stringify({model:c.model,temperature:0.2,messages})});
+  if(!r.ok)throw Error('HTTP '+r.status+'：'+(await r.text()).slice(0,240));
+  const d=await r.json();return d.choices?.[0]?.message?.content||'';
+}
+async function testApiConfig(){try{saveApiConfig();const out=await callChatApi([{role:'user',content:'Reply with exactly OK'}]);toast(out.trim().slice(0,60)||'连接成功')}catch(e){toast('连接失败：'+e.message)}}
+async function ocrScreenshot(dataUrl){
+  const c=getApiConfig();if(!c.key||!c.model)throw Error('请先配置支持图片输入的视觉模型');
+  const prompt='请识别这张收藏帖子截图，提取标题、作者/账号、正文摘要、原帖链接（若可见）、标签。只返回JSON：{"title":"","author":"","summary":"","url":"","tags":[]}。看不清的字段留空，不要猜。';
+  const r=await fetch(c.base.replace(/\/+$/,'')+'/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+c.key},body:JSON.stringify({model:c.model,temperature:0,messages:[{role:'user',content:[{type:'text',text:prompt},{type:'image_url',image_url:{url:dataUrl}}]}]})});
+  if(!r.ok)throw Error('OCR API HTTP '+r.status);
+  const d=await r.json(),txt=d.choices?.[0]?.message?.content||'';
+  return JSON.parse(txt.replace(/```(?:json)?/gi,'').replace(/```/g,'').trim());
+}
+async function aiClassifyAll(){
+  if(!items.length){toast('收藏库为空');return}
+  if(!confirm('将通过已配置的 API 分批整理收藏的类型、文件夹和标签。继续？'))return;
+  try{
+    const batch=items.map(x=>({id:x.id,name:x.name,type:x.type,description:(x.description||x.note||'').slice(0,900),tags:x.tags||[],folder:x.folder||''}));
+    const answer=await callChatApi([{role:'system',content:'你是收藏资源整理助手。根据输入的资源，为每条返回JSON数组，元素字段为id, folder, tags, type。type只能是character/preset/tool/inspiration/chat；folder用简短中文分类；tags为最多5个短标签。只输出JSON，不要Markdown。不得改变id。'},
+      {role:'user',content:JSON.stringify(batch)}]);
+    const clean=answer.replace(/```(?:json)?/gi,'').replace(/```/g,'').trim();
+    const arr=JSON.parse(clean);
+    for(const row of arr){const x=items.find(a=>a.id===row.id);if(!x)continue;if(row.folder)x.folder=String(row.folder);if(Array.isArray(row.tags))x.tags=[...new Set(row.tags.map(String))];if(['character','preset','tool','inspiration','chat'].includes(row.type))x.type=row.type;await saveItem(x)}
+    await load();render();toast('AI 分类完成');
+  }catch(e){toast('AI 分类失败：'+e.message)}
+}
+async function moveItem(id,delta){
+  const sorted=[...items].sort((a,b)=>(a.order??a.created)-(b.order??b.created));
+  const i=sorted.findIndex(x=>x.id===id),j=i+delta;if(i<0||j<0||j>=sorted.length){toast('已经到达列表边界');return}
+  const a=sorted[i],b=sorted[j],ao=a.order??i,bo=b.order??j;a.order=bo;b.order=ao;
+  await saveItem(a);await saveItem(b);await load();openDetail(id);toast('顺序已调整');
+}
+function setAccent(c){document.documentElement.style.setProperty('--accent',c);localStorage.setItem('cn-accent',c)}
+function toggleDark(){document.body.classList.toggle('dark');localStorage.setItem('cn-dark',document.body.classList.contains('dark')?'1':'0')}
+function openAdd(type='character'){document.getElementById('modal').innerHTML=`<h2>添加收藏</h2><div class="formgrid"><div class="formrow"><label>资源类型</label><select class="field" id="f-type">${categories.slice(1,6).map(([id,ic,n])=>`<option value="${id}" ${id===type?'selected':''}>${n}</option>`).join('')}</select></div><div class="formrow"><label>名称 *</label><input class="field" id="f-name" placeholder="给这份收藏起个名字"></div><div class="formrow"><label>作者 / 来源</label><input class="field" id="f-author" placeholder="作者或平台"></div><div class="formrow"><label>原始链接</label><input class="field" id="f-url" placeholder="https://…"></div><div class="formrow"><label>标签（用逗号分隔）</label><input class="field" id="f-tags" placeholder="GB, 现代, 病娇"></div><div class="formrow"><label>文件夹</label><input class="field" id="f-folder" placeholder="例如：待玩 / 古风 / 高优先级"></div><div class="formrow"><label>状态</label><select class="field" id="f-status"><option>待游玩</option><option>想玩</option><option>正在玩</option><option>已完成</option><option>搁置</option><option>已收藏</option></select></div><div class="formrow full"><label>简介 / 备注</label><textarea class="field" id="f-note" placeholder="简单记下这份资源的内容…"></textarea></div><div class="formrow full"><label>角色卡文件 / 封面（PNG、JSON 等）</label><input class="field" id="f-file" type="file" accept=".png,.json,.webp,.jpg,.jpeg,.txt,.yaml,.yml"></div><div class="formrow full"><label>原帖截图（可选，自己截取后上传）</label><input class="field" id="f-screenshot" type="file" accept="image/*"><small class="import-hint">仅作为原帖截图附件保存，不会自动识别或替换角色卡封面。</small></div></div><div class="modalfoot"><button class="btn" onclick="closeModal()">取消</button><button class="btn primary" onclick="createItem()">保存收藏</button></div>`;showModal()}
+function showModal(){document.getElementById('modalBack').classList.add('show')}function closeModal(){document.getElementById('modalBack').classList.remove('show')}
+async function createItem(){let name=document.getElementById('f-name').value.trim();if(!name){toast('请填写名称');return}let file=document.getElementById('f-file').files[0],shot=document.getElementById('f-screenshot')?.files[0],image=null,attachment=null,raw=null,screenshot=null;if(file){attachment={name:file.name,type:file.type,size:file.size,data:await fileToData(file)};if(file.type.startsWith('image/'))image=attachment.data;if(file.name.toLowerCase().endsWith('.json')){try{raw=JSON.parse(await file.text())}catch{}}}if(shot)screenshot=await fileToData(shot);
+let type=document.getElementById('f-type').value;let x={id:uid(),type,name,author:document.getElementById('f-author').value.trim(),url:document.getElementById('f-url').value.trim(),tags:document.getElementById('f-tags').value.split(/[,，]/).map(s=>s.trim()).filter(Boolean),status:document.getElementById('f-status').value,folder:document.getElementById('f-folder')?.value.trim()||'',note:document.getElementById('f-note').value,created:Date.now(),image,attachment,screenshot,raw,repo:'',ideas:'',rating:0,chatlog:''};if(raw?.data?.name)x.name=raw.data.name;if(raw?.name)x.name=raw.name;await saveItem(x);await load();closeModal();showPage(type);toast('已保存到收藏馆')}
+function fileToData(f){return new Promise((res,rej)=>{let r=new FileReader();r.onload=()=>res(r.result);r.onerror=rej;r.readAsDataURL(f)})}
+async function ensureEmbeddedContent(x){
+  if(x.embeddedContent)return;
+  const raw=x.raw||{},d=raw.data||raw.character||raw;
+  const book=d.character_book||d.worldbook||d.lorebook||raw.character_book||{};
+  const entries=Array.isArray(book.entries)?book.entries:Object.values(book.entries||{});
+  const greetings=[d.first_mes,d.first_message,...(Array.isArray(d.alternate_greetings)?d.alternate_greetings:[])].filter(v=>typeof v==='string'&&v.trim());
+  let regexes=d.regex_scripts||d.extensions?.regex_scripts||raw.regex_scripts||[];
+  if(!Array.isArray(regexes))regexes=Object.values(regexes||{});
+  let qrs=d.quick_replies||d.extensions?.quick_replies||raw.quick_replies||[];
+  if(!Array.isArray(qrs))qrs=Object.values(qrs||{});
+  x.embeddedContent={worldbook:entries.map((e,i)=>({id:String(e.id??i),name:e.name||e.comment||`条目 ${i+1}`,content:e.content||e.entry||'',enabled:e.enabled!==false,keys:e.keys||e.key||[],raw:e})),greetings,regexes,qrs};
+  x.embeddedVersions=x.embeddedVersions||[];
+}
+function cleanEmbeddedText(v){
+  if(typeof v!=='string')return v;
+  return v.replace(/\\r\\n/g,'\n').replace(/\\n/g,'\n').replace(/\\r/g,'\n');
+}
+function cleanEmbeddedValue(v){
+  if(typeof v==='string')return cleanEmbeddedText(v);
+  if(Array.isArray(v))return v.map(cleanEmbeddedValue);
+  if(v&&typeof v==='object'){const o={};for(const [k,val] of Object.entries(v))o[k]=cleanEmbeddedValue(val);return o}
+  return v;
+}
+function ensureEmbeddedContent(x){
+  if(x.embeddedContent){x.embeddedContent=cleanEmbeddedValue(x.embeddedContent);return}
+  const raw=x.raw||{},d=raw.data||raw.character||raw;
+  const book=d.character_book||d.worldbook||d.lorebook||raw.character_book||{};
+  const entries=Array.isArray(book.entries)?book.entries:Object.values(book.entries||{});
+  const greetings=[d.first_mes,d.first_message,...(Array.isArray(d.alternate_greetings)?d.alternate_greetings:[])].filter(v=>typeof v==='string'&&v.trim()).map(cleanEmbeddedText);
+  let regexes=d.regex_scripts||d.extensions?.regex_scripts||raw.regex_scripts||[];
+  if(!Array.isArray(regexes))regexes=Object.values(regexes||{});
+  let qrs=d.quick_replies||d.extensions?.quick_replies||raw.quick_replies||[];
+  if(!Array.isArray(qrs))qrs=Object.values(qrs||{});
+  x.embeddedContent={worldbook:entries.map((e,i)=>cleanEmbeddedValue({...e,id:String(e.id??i),name:e.name||e.comment||`条目 ${i+1}`,content:e.content||e.entry||'',enabled:e.enabled!==false,keys:e.keys||e.key||[]})),greetings,regexes:cleanEmbeddedValue(regexes),qrs:cleanEmbeddedValue(qrs)};
+  x.embeddedVersions=x.embeddedVersions||[];
+}
+function embeddedEditor(id){
+  const x=items.find(a=>a.id===id);ensureEmbeddedContent(x);
+  const c=x.embeddedContent,versions=x.embeddedVersions||[];
+  const section=(key,label,arr)=>`<details class="embedded-accordion" open><summary><span>${label}</span><small>${arr.length} 条</small></summary><div class="embedded-list">${arr.map((item,i)=>{const title=item.name||item.comment||item.label||item.title||`${label} ${i+1}`,preview=String(item.content||item.entry||item.findRegex||item.regex||'').replace(/\s+/g,' ').slice(0,110);return `<button class="embedded-row" onclick="editEmbeddedEntry('${id}','${key}',${i})"><span class="embedded-row-main"><b>${esc(title)}</b><small>${esc(preview||'点击查看并编辑条目')}</small></span><span class="embedded-row-arrow">›</span></button>`}).join('')||'<p class="import-hint">暂无条目</p>'}<button class="btn small" onclick="addEmbeddedItem('${id}','${key}')">＋ 新增${label}条目</button></div></details>`;
+  return `<style>
+  .embedded-accordion{border:1px solid var(--line);border-radius:14px;margin:10px 0;overflow:hidden;background:var(--panel2)}
+  .embedded-accordion summary{list-style:none;cursor:pointer;padding:14px 16px;display:flex;align-items:center;justify-content:space-between;font-weight:650}
+  .embedded-accordion summary::-webkit-details-marker{display:none}.embedded-accordion summary:after{content:'⌄';font-size:18px;color:var(--muted);margin-left:10px}
+  .embedded-accordion[open] summary:after{content:'⌃'}.embedded-accordion summary small{margin-left:auto;color:var(--muted);font-weight:400}
+  .embedded-list{padding:0 12px 12px}.embedded-row{display:flex;width:100%;align-items:center;text-align:left;gap:12px;padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--panel);margin:7px 0;color:inherit}
+  .embedded-row-main{display:grid;gap:5px;min-width:0;flex:1}.embedded-row-main b{overflow-wrap:anywhere}.embedded-row-main small{color:var(--muted);font-weight:400;white-space:normal;overflow-wrap:anywhere}.embedded-row-arrow{font-size:22px;color:var(--muted)}
+  .embedded-version{display:flex;justify-content:space-between;align-items:center;padding:8px 0}
+  </style>
+  ${section('worldbook','世界书',c.worldbook||[])}
+  <details class="embedded-accordion"><summary><span>开场白</span><small>${(c.greetings||[]).length} 条</small></summary><div class="embedded-list">${(c.greetings||[]).map((g,i)=>`<button class="embedded-row" onclick="editGreeting('${id}',${i})"><span class="embedded-row-main"><b>开场白 ${i+1}</b><small>${esc(String(g).replace(/\s+/g,' ').slice(0,110)||'点击编辑')}</small></span><span class="embedded-row-arrow">›</span></button>`).join('')}<button class="btn small" onclick="addGreeting('${id}')">＋ 新增开场白</button></div></details>
+  ${section('regexes','正则 / Regex',c.regexes||[])}
+  ${section('qrs','QR / Quick Replies',c.qrs||[])}
+  <div class="toolbar" style="margin-top:12px"><button class="btn" onclick="saveEmbeddedVersion('${id}')">保存当前为新版本</button><button class="btn" onclick="exportEmbedded('${id}')">导出内容 JSON</button></div>
+  <div style="margin-top:12px"><b>版本历史</b>${versions.length?versions.map((v,i)=>`<div class="embedded-version"><span class="sub">v${i+1} · ${new Date(v.created).toLocaleString()}</span><button class="btn small" onclick="restoreEmbedded('${id}',${i})">恢复</button></div>`).join(''):'<p class="import-hint">暂无历史版本</p>'}</div>`;
+}
+async function renderEmbedded(id){const el=document.getElementById('embedded-content-'+id);if(el)el.innerHTML=embeddedEditor(id)}
+function editEmbeddedEntry(id,key,index){
+  const x=items.find(a=>a.id===id);ensureEmbeddedContent(x);const item=x.embeddedContent[key][index];
+  const isWorld=key==='worldbook',isQr=key==='qrs';
+  const title=item.name||item.comment||item.label||item.title||`${key} ${index+1}`;
+  document.getElementById('modal').innerHTML=`<div class="embedded-fullscreen"><div class="embedded-modal-head"><b>${esc(title)}</b><button class="btn" onclick="closeModal()">✕</button></div><div class="embedded-modal-body">${isWorld?`<label>条目名称</label><input class="field" id="ee-name" value="${esc(item.name||item.comment||'')}"><label>关键词（逗号分隔）</label><input class="field" id="ee-keys" value="${esc((item.keys||item.key||[]).join? (item.keys||item.key||[]).join(', '):item.keys||item.key||'')}"><label>条目内容</label><textarea class="field embedded-fulltext" id="ee-content">${esc(cleanEmbeddedText(item.content||item.entry||''))}</textarea><label class="embedded-check"><input type="checkbox" id="ee-enabled" ${item.enabled!==false?'checked':''}> 启用条目</label>`:isQr?`<label>快捷回复名称</label><input class="field" id="ee-name" value="${esc(item.label||item.name||'')}"><label>条目内容（JSON，可编辑）</label><textarea class="field embedded-fulltext" id="ee-object">${esc(JSON.stringify(item,null,2))}</textarea>`:`<label>正则名称</label><input class="field" id="ee-name" value="${esc(item.name||item.scriptName||'')}"><label>正则条目（JSON，可编辑）</label><textarea class="field embedded-fulltext" id="ee-object">${esc(JSON.stringify(item,null,2))}</textarea>`}</div><div class="embedded-modal-foot"><button class="btn" onclick="deleteEmbeddedItem('${id}','${key}',${index})">删除条目</button><button class="btn primary" onclick="saveEmbeddedEntry('${id}','${key}',${index})">保存条目</button></div></div>`;
+  showModal();
+}
+function editGreeting(id,index){
+ const x=items.find(a=>a.id===id);ensureEmbeddedContent(x);
+ document.getElementById('modal').innerHTML=`<div class="embedded-fullscreen"><div class="embedded-modal-head"><b>编辑开场白 ${index+1}</b><button class="btn" onclick="closeModal()">✕</button></div><div class="embedded-modal-body"><label>开场白内容</label><textarea class="field embedded-fulltext" id="ee-greeting">${esc(cleanEmbeddedText(x.embeddedContent.greetings[index]||''))}</textarea></div><div class="embedded-modal-foot"><button class="btn" onclick="deleteGreeting('${id}',${index})">删除</button><button class="btn primary" onclick="saveGreeting('${id}',${index})">保存</button></div></div>`;showModal();
+}
+async function saveEmbeddedEntry(id,key,index){
+ const x=items.find(a=>a.id===id),item=x.embeddedContent[key][index];
+ try{
+  if(key==='worldbook'){item.name=document.getElementById('ee-name').value;item.comment=item.name;item.keys=document.getElementById('ee-keys').value.split(',').map(v=>v.trim()).filter(Boolean);item.content=document.getElementById('ee-content').value;item.enabled=document.getElementById('ee-enabled').checked}
+  else {const obj=JSON.parse(document.getElementById('ee-object').value);Object.assign(item,obj);const name=document.getElementById('ee-name').value;if(key==='qrs'&&name)item.label=name;if(key==='regexes'&&name)item.name=name}
+  x.embeddedContent=cleanEmbeddedValue(x.embeddedContent);await saveItem(x);await load();openDetail(id);toast('条目已保存');
+ }catch(e){toast('保存失败：'+e.message)}
+}
+async function saveGreeting(id,index){const x=items.find(a=>a.id===id);x.embeddedContent.greetings[index]=document.getElementById('ee-greeting').value;await saveItem(x);await load();openDetail(id);toast('开场白已保存')}
+function addEmbeddedItem(id,key){const x=items.find(a=>a.id===id);ensureEmbeddedContent(x);const defaults={worldbook:{name:'新世界书条目',comment:'新世界书条目',content:'',keys:[],enabled:true},regexes:{name:'新正则',findRegex:'',replaceString:'',trimStrings:[]},qrs:{label:'新快捷回复',content:''}};x.embeddedContent[key].push(defaults[key]||{});openDetail(id);setTimeout(()=>editEmbeddedEntry(id,key,x.embeddedContent[key].length-1),0)}
+function deleteEmbeddedItem(id,key,index){const x=items.find(a=>a.id===id);ensureEmbeddedContent(x);if(!confirm('删除这个条目？'))return;x.embeddedContent[key].splice(index,1);saveItem(x).then(()=>{closeModal();openDetail(id)})}
+function addGreeting(id){const x=items.find(a=>a.id===id);ensureEmbeddedContent(x);x.embeddedContent.greetings.push('');openDetail(id);setTimeout(()=>editGreeting(id,x.embeddedContent.greetings.length-1),0)}
+function deleteGreeting(id,index){const x=items.find(a=>a.id===id);ensureEmbeddedContent(x);if(!confirm('删除这条开场白？'))return;x.embeddedContent.greetings.splice(index,1);saveItem(x).then(()=>{closeModal();openDetail(id)})}
+async function saveEmbedded(id,makeVersion=false){const x=items.find(a=>a.id===id);await saveItem(x);toast('已保存')}
+function saveEmbeddedVersion(id){saveEmbedded(id,true)}
+async function restoreEmbedded(id,index){
+  const x=items.find(a=>a.id===id),v=x?.embeddedVersions?.[index];if(!v)return;
+  if(!confirm('将当前内容替换为该历史版本？'))return;
+  x.embeddedContent=JSON.parse(JSON.stringify(v.content));await saveItem(x);await load();openDetail(id);toast('已恢复历史版本');
+}
+function exportEmbedded(id){
+  const x=items.find(a=>a.id===id);ensureEmbeddedContent(x);
+  const blob=new Blob([JSON.stringify(x.embeddedContent,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=(x.name||'角色卡')+'-内置内容.json';a.click();URL.revokeObjectURL(a.href);
+}
+function openDetail(id){let x=items.find(a=>a.id===id);if(!x)return;ensureEmbeddedContent(x);current=id;page=x.type;nav();document.getElementById('crumb').textContent='私人收藏馆 / '+names[page]+' / 详情';let im=x.image?`<img src="${x.image}">`:({character:'♙',preset:'☷',tool:'⚒',inspiration:'✧',chat:'▤'}[x.type]||'◇');document.getElementById('view').innerHTML=`<div class="section-head"><button class="btn small" onclick="showPage('${x.type}')">← 返回列表</button><button class="btn small" onclick="editBasic('${id}')">编辑资料</button></div><section class="glass detail"><div class="detailtop"><div class="detailcover">${im}</div><div style="min-width:0;flex:1"><div class="eyebrow">${names[x.type]}</div><h1>${esc(x.name)}</h1><div class="detailmeta">${esc(x.author||'未填写作者')}${x.folder?' · 文件夹：'+esc(x.folder):''} · 收藏于 ${new Date(x.created).toLocaleDateString()}</div>${x.description?`<p style="color:var(--muted);font-size:13px;white-space:pre-wrap;max-height:180px;overflow:auto">${esc(x.description)}</p>`:'' }<div class="chips">${(x.tags||[]).map(t=>`<span class="chip">${esc(t)}</span>`).join('')}<span class="chip">${esc(x.status||'已收藏')}</span></div><div class="detail-actions">${x.url?`<button class="btn small" onclick="window.open('${esc(x.url)}','_blank','noopener')">↗ 打开来源</button>`:''}${x.attachment?`<button class="btn small" onclick="downloadAttachment('${id}')">↓ 下载附件</button>`:''}<button class="btn small" onclick="editBasic('${id}')">✎ 编辑</button><button class="btn small" onclick="moveItem('${id}',-1)">↑ 上移</button><button class="btn small" onclick="moveItem('${id}',1)">↓ 下移</button><button class="btn small" onclick="removeItem('${id}')">删除</button></div></div></div><div class="detailgrid"><div class="glass editbox"><h3>✎ Repo / 游玩评价</h3><textarea placeholder="写下完整评价、游玩感受…" onchange="updateField('${id}','repo',this.value)">${esc(x.repo||'')}</textarea></div><div class="glass editbox"><h3>✧ 我的想法 / 脑洞</h3><textarea placeholder="想尝试的剧情、人设、脑洞…" onchange="updateField('${id}','ideas',this.value)">${esc(x.ideas||'')}</textarea></div><div class="glass editbox"><h3>★ 个人评分</h3><div style="font-size:25px;letter-spacing:4px">${[1,2,3,4,5].map(n=>`<button style="background:none;color:${n<=(x.rating||0)?'var(--accent)':'var(--muted)'};font-size:25px;padding:0" onclick="updateField('${id}','rating',${n});openDetail('${id}')">★</button>`).join('')}</div><small style="color:var(--muted)">${x.rating||0}/5</small></div><div class="glass editbox"><h3>☷ 简介 / 备注</h3><textarea placeholder="补充说明…" onchange="updateField('${id}','note',this.value)">${esc(x.note||'')}</textarea></div><div class="glass editbox wide"><h3>📚 角色卡内置内容</h3><p class="import-hint">查看并编辑世界书条目、开场白、正则脚本和 QR（Quick Replies）。修改会保存为可回溯版本。</p><div id="embedded-content-${id}"></div></div><div class="glass editbox wide"><h3>▤ 聊天记录 / 剧情存档备注</h3><textarea placeholder="可以粘贴聊天片段、存档说明或剧情进度…" onchange="updateField('${id}','chatlog',this.value)">${esc(x.chatlog||'')}</textarea></div><div class="glass editbox wide"><h3>原帖截图</h3><p class="import-hint">上传你自己截取的社区帖子图片作为附件。截图与角色卡封面分开保存；默认不做 OCR。</p><div class="toolbar"><label class="btn small">上传 / 更换截图 <input type="file" accept="image/*" class="hidden" onchange="attachScreenshot('${id}',this.files[0])"></label>${x.screenshot?'<button class="btn small" onclick="downloadScreenshot(\''+id+'\')">下载截图</button><button class="btn small" onclick="clearScreenshot(\''+id+'\')">移除截图</button>':''}<button class="btn small" onclick="runScreenshotOcr('${id}')">手动 OCR（可选）</button></div>${x.screenshot?'<img src="'+x.screenshot+'" alt="原帖截图" style="max-width:100%;max-height:360px;object-fit:contain;border-radius:12px;margin-top:8px">':'<div class="import-hint">尚未上传原帖截图</div>'}</div><div class="glass editbox wide"><h3>关联附件</h3><div style="font-size:13px;color:var(--muted)">${x.attachment?`${esc(x.attachment.name)} · ${(x.attachment.size/1024).toFixed(1)} KB`:'尚未添加附件'}</div></div></div></section>`;renderEmbedded(id)}
+async function attachScreenshot(id,file){
+  if(!file)return;const x=items.find(a=>a.id===id);x.screenshot=await fileToData(file);x.screenshotName=file.name;await saveItem(x);await load();openDetail(id);toast('原帖截图已保存');
+}
+function downloadScreenshot(id){const x=items.find(a=>a.id===id);if(!x?.screenshot)return;const a=document.createElement('a');a.href=x.screenshot;a.download=x.screenshotName||'原帖截图.png';a.click()}
+async function clearScreenshot(id){const x=items.find(a=>a.id===id);if(!x)return;x.screenshot=null;x.screenshotName='';await saveItem(x);await load();openDetail(id);toast('已移除原帖截图')}
+async function runScreenshotOcr(id){
+  const x=items.find(a=>a.id===id),data=x?.screenshot||null;
+  if(!data){toast('这张卡没有可识别的截图');return}
+  try{const result=await ocrScreenshot(data);x.postInfo=result;x.note=[x.note||'',`帖子：${result.title||''}\n作者：${result.author||''}\n摘要：${result.summary||''}\n链接：${result.url||''}`].filter(Boolean).join('\n\n');if(result.url&&!x.url)x.url=result.url;await saveItem(x);await load();openDetail(id);toast('截图识别完成')}catch(e){toast('OCR 失败：'+e.message)}
+}
+async function updateField(id,k,v){let x=items.find(a=>a.id===id);x[k]=v;await saveItem(x);toast('已自动保存')}
+async function editBasic(id){let x=items.find(a=>a.id===id);document.getElementById('modal').innerHTML=`<h2>编辑收藏资料</h2><div class="formgrid"><div class="formrow full"><label>名称</label><input id="e-name" class="field" value="${esc(x.name)}"></div><div class="formrow"><label>作者 / 来源</label><input id="e-author" class="field" value="${esc(x.author||'')}"></div><div class="formrow"><label>原始链接</label><input id="e-url" class="field" value="${esc(x.url||'')}"></div><div class="formrow"><label>标签（逗号分隔）</label><input id="e-tags" class="field" value="${esc((x.tags||[]).join(', '))}"></div><div class="formrow"><label>文件夹</label><input id="e-folder" class="field" value="${esc(x.folder||'')}" placeholder="例如：待玩 / 古风"></div><div class="formrow"><label>状态</label><select id="e-status" class="field">${['想玩','待游玩','正在玩','已完成','搁置','已收藏'].map(s=>`<option ${x.status===s?'selected':''}>${s}</option>`).join('')}</select></div></div><div class="modalfoot"><button class="btn" onclick="closeModal()">取消</button><button class="btn primary" onclick="saveBasic('${id}')">保存</button></div>`;showModal()}
+async function saveBasic(id){let x=items.find(a=>a.id===id);x.name=document.getElementById('e-name').value.trim()||x.name;x.author=document.getElementById('e-author').value;x.url=document.getElementById('e-url').value;x.tags=document.getElementById('e-tags').value.split(/[,，]/).map(s=>s.trim()).filter(Boolean);x.status=document.getElementById('e-status').value;x.folder=document.getElementById('e-folder')?.value.trim()||'';await saveItem(x);await load();closeModal();openDetail(id);toast('资料已更新')}
+async function removeItem(id){if(!confirm('确定删除这份收藏吗？此操作不可撤销。'))return;await deleteItem(id);await load();showPage(page);toast('已删除')}
+function downloadAttachment(id){let x=items.find(a=>a.id===id);if(!x?.attachment)return;let a=document.createElement('a');a.href=x.attachment.data;a.download=x.attachment.name;a.click()}
+async function addTag(){let t=prompt('输入新标签名称');if(!t?.trim())return;toast('标签会在编辑收藏时添加：'+t.trim())}
+async function exportBackup(){let data={app:'CardNest',version:1,exportedAt:new Date().toISOString(),items};let blob=new Blob([JSON.stringify(data)],{type:'application/json'});downloadBlob(blob,'CardNest-backup-'+new Date().toISOString().slice(0,10)+'.json');toast('备份文件已生成')}
+function downloadBlob(blob,name){let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000)}
+async function clearAll(){if(!confirm('确定清空所有本地收藏？建议先导出备份。'))return;let tx=db.transaction('items','readwrite');tx.objectStore('items').clear();tx.oncomplete=async()=>{await load();showPage('home');toast('本地收藏已清空')}}
+
+function decodeBase64Utf8(value){
+  try{
+    const clean=value.replace(/\s/g,'');
+    const bin=atob(clean);
+    const bytes=Uint8Array.from(bin,c=>c.charCodeAt(0));
+    return new TextDecoder('utf-8',{fatal:false}).decode(bytes);
+  }catch{return value}
+}
+async function inflateBytes(bytes,format='deflate'){
+  if(!('DecompressionStream'in window))return null;
+  try{
+    const ds=new DecompressionStream(format);
+    return new Uint8Array(await new Response(new Blob([bytes]).stream().pipeThrough(ds)).arrayBuffer());
+  }catch{return null}
+}
+async function parseMetaText(value){
+  if(!value)return null;
+  let candidates=[value];
+  const b64=decodeBase64Utf8(value);
+  if(b64!==value)candidates.push(b64);
+  for(const c of [...candidates]){
+    const trimmed=c.trim();
+    try{return JSON.parse(trimmed)}catch{}
+    // Some card formats wrap JSON in base64, optionally compressed.
+    try{
+      const raw=Uint8Array.from(atob(trimmed.replace(/\s/g,'')),x=>x.charCodeAt(0));
+      for(const fmt of ['deflate','gzip']){
+        const inflated=await inflateBytes(raw,fmt);
+        if(inflated){const txt=new TextDecoder().decode(inflated);try{return JSON.parse(txt)}catch{}}
+      }
+      const txt=new TextDecoder().decode(raw);try{return JSON.parse(txt)}catch{}
+    }catch{}
+  }
+  return null;
+}
+async function readPngCharacter(file){
+  const bytes=new Uint8Array(await file.arrayBuffer());
+  const sig=[137,80,78,71,13,10,26,10];
+  if(bytes.length<8||!sig.every((v,i)=>bytes[i]===v))return null;
+  const dec=new TextDecoder('utf-8');let off=8,found=[];
+  while(off+12<=bytes.length){
+    const len=(bytes[off]*0x1000000)+(bytes[off+1]<<16)+(bytes[off+2]<<8)+bytes[off+3];
+    if(!Number.isSafeInteger(len)||len<0||off+12+len>bytes.length)break;
+    const type=dec.decode(bytes.slice(off+4,off+8)),data=bytes.slice(off+8,off+8+len);
+    if(type==='tEXt'){
+      const z=data.indexOf(0);
+      if(z>=0){const key=dec.decode(data.slice(0,z)).toLowerCase();if(['chara','character','ccv3'].includes(key))found.push(dec.decode(data.slice(z+1)))}
+    }else if(type==='iTXt'){
+      const z=data.indexOf(0);
+      if(z>=0){
+        const key=dec.decode(data.slice(0,z)).toLowerCase();
+        if(['chara','character','ccv3'].includes(key)){
+          let i=z+1,compressed=data[i++],method=data[i++];while(i<data.length&&data[i++]!==0){}while(i<data.length&&data[i++]!==0){}
+          let payload=data.slice(i);
+          if(compressed===1){const out=await inflateBytes(payload,'deflate');if(out)payload=out}
+          found.push(dec.decode(payload));
+        }
+      }
+    }else if(type==='zTXt'){
+      const z=data.indexOf(0);
+      if(z>=0&&['chara','character','ccv3'].includes(dec.decode(data.slice(0,z)).toLowerCase())){
+        const out=await inflateBytes(data.slice(z+2),'deflate');
+        if(out)found.push(dec.decode(out));
+      }
+    }
+    off+=12+len;if(type==='IEND')break;
+  }
+  for(const val of found){const parsed=await parseMetaText(val);if(parsed)return parsed}
+  return null;
+}
+function normalizeCharacter(raw,file){
+  const d=raw?.data||raw?.character||raw||{};
+  const name=d.name||raw?.name||file.name.replace(/\.[^.]+$/,'');
+  const desc=[d.description,d.personality,d.scenario,raw?.description].filter(v=>typeof v==='string'&&v.trim()).join('\n\n');
+  const tags=Array.isArray(d.tags)?d.tags:[];
+  return {name,description:desc,author:d.creator||d.author||raw?.creator||'',tags,raw};
+}
+function fingerprint(file){return new Promise((resolve,reject)=>{const r=new FileReader();r.onload=async()=>{try{const bytes=new Uint8Array(r.result),hash=await crypto.subtle.digest('SHA-256',bytes);resolve([...new Uint8Array(hash)].map(x=>x.toString(16).padStart(2,'0')).join(''))}catch(e){reject(e)}};r.onerror=reject;r.readAsArrayBuffer(file)})}
+async function buildImportRecords(files){
+  const records=[];
+  for(const f of files){
+    const ext=f.name.split('.').pop().toLowerCase();let raw=null;
+    if(ext==='json'){try{raw=JSON.parse(await f.text())}catch{}}
+    else if(ext==='png')raw=await readPngCharacter(f);
+    const parsed=normalizeCharacter(raw||{},f),data=await fileToData(f),isImage=f.type.startsWith('image/');
+    records.push({file:f,hash:await fingerprint(f),raw,parsed,data,isImage});
+  }
+  return records;
+}
+function duplicateFor(rec){
+  const byHash=items.find(x=>x.fileHash&&x.fileHash===rec.hash);
+  if(byHash)return {item:byHash,reason:'文件内容完全相同'};
+  const n=rec.parsed.name.trim().toLowerCase(),a=(rec.parsed.author||'').trim().toLowerCase();
+  const byName=items.find(x=>x.name.trim().toLowerCase()===n&&(!a||!x.author||x.author.trim().toLowerCase()===a));
+  return byName?{item:byName,reason:'名称/作者相似'}:null;
+}
+async function commitImport(records){
+  const policy=document.getElementById('duplicate-policy')?.value||'skip';let added=0,skipped=0,replaced=0,failed=0;
+  for(const rec of records){
+    try{
+      const dup=duplicateFor(rec);
+      if(dup&&policy==='skip'){skipped++;continue}
+      const x={id:dup&&policy==='replace'?dup.item.id:uid(),type:'character',name:rec.parsed.name,author:rec.parsed.author||'文件导入',url:'',tags:[...new Set(['文件导入',...(rec.parsed.tags||[])])],status:'待游玩',folder:'未整理',order:Date.now()+added,note:'',description:rec.parsed.description,created:Date.now(),image:rec.isImage&&rec.file.name.toLowerCase().endsWith('.png')&&rec.raw?rec.data:null,screenshot:null,attachment:{name:rec.file.name,type:rec.file.type,size:rec.file.size,data:rec.data},raw:rec.raw,fileHash:rec.hash,repo:'',ideas:'',rating:0,chatlog:''};
+      if(dup&&policy==='keep'){x.name=x.name+'（副本）';}
+      await saveItem(x);if(dup&&policy==='replace')replaced++;else added++;
+    }catch{failed++}
+  }
+  await load();showPage('character');toast(`导入完成：新增 ${added}，覆盖 ${replaced}，跳过 ${skipped}，失败 ${failed}`);
+}
+async function importFiles(files){
+  const records=await buildImportRecords(files);
+  const rows=records.map((r,i)=>{const d=duplicateFor(r);return `<div class="preview-item"><b>${esc(r.parsed.name)}</b><span>${esc(r.file.name)} · ${r.raw?'已解析':'未识别角色元数据'}${d?' · ⚠ '+esc(d.reason):''}</span><div class="sub">${esc((r.parsed.description||'').slice(0,140))}</div></div>`}).join('');
+  document.getElementById('modal').innerHTML=`<h2>导入预览</h2><p class="import-hint">共 ${records.length} 个文件。检查解析结果和重复提示后再导入。</p><div class="import-preview">${rows}</div><div class="formrow" style="margin-top:14px"><label>重复项处理方式</label><select class="field" id="duplicate-policy"><option value="skip">跳过重复项（推荐）</option><option value="replace">覆盖已有卡片</option><option value="keep">保留两份并标记副本</option></select></div><div class="modalfoot"><button class="btn" onclick="closeModal()">取消</button><button class="btn primary" id="doImport">确认导入</button></div>`;
+  showModal();document.getElementById('doImport').onclick=async()=>{const b=document.getElementById('doImport');b.disabled=true;b.textContent='正在保存…';await commitImport(records);closeModal()};
+}
+document.getElementById('fileInput').addEventListener('change',async e=>{const fs=[...e.target.files];if(!fs.length)return;try{await importFiles(fs)}catch(err){toast('预览失败：'+err.message)}e.target.value=''});
+document.getElementById('backupInput').addEventListener('change',async e=>{let f=e.target.files[0];if(!f)return;try{let d=JSON.parse(await f.text());if(!Array.isArray(d.items))throw Error('格式错误');if(!confirm('导入 '+d.items.length+' 条记录？同 ID 项目将被覆盖。'))return;for(let x of d.items)await saveItem(x);await load();showPage('home');toast('备份导入完成')}catch(err){toast('备份文件无法识别')}e.target.value=''});
+if(localStorage.getItem('cn-dark')==='1')document.body.classList.add('dark');if(localStorage.getItem('cn-accent'))setAccent(localStorage.getItem('cn-accent'));
+</script></body></html>
